@@ -24,7 +24,20 @@ load_file_with_names <- function (filePath){
   #datasetX <-read.table("X.txt",col.names = column_names)
   
   datasetC <-read.table("dataset/C.txt",col.names = "stimolo")
+  datasetY <-read.table("dataset/Y.txt", col.names = "target")
   datasetXC <- cbind(datasetX,cData = datasetC$stimolo)
+  datasetXCY <- cbind(datasetXC,target = datasetY$target)
   write.csv(datasetXC,"dataset/datasetXC.csv")
-
+  
+  remove(datasetC)
+  remove(datasetX)
+  remove(datasetXC)
+  remove(datasetX_part1)
+  remove(datasetX_part2)
+  remove(datasetX_part3)
+  remove(datasetX_part4)
+  remove(datasetX_1)
+  remove(datasetX_2)
+  
 }
+
