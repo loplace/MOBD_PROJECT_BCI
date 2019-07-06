@@ -1,7 +1,7 @@
 # Script to Generate Column Names
 library(dplyr)
 
-load_file_with_names <- function (filePath){
+load_file_with_names <- function (){
   
   elettrodi <- c("Fz", "Cz", "Pz", "Oz", "P3", "P4", "P7" , "P8")
   column_names <- c()
@@ -26,12 +26,12 @@ load_file_with_names <- function (filePath){
   datasetC <-read.table("dataset/C.txt",col.names = "stimolo")
   datasetY <-read.table("dataset/Y.txt", col.names = "target")
   datasetXC <- cbind(datasetX,cData = datasetC$stimolo)
-  datasetXCY <- cbind(datasetXC,target = datasetY$target)
+  #datasetXCY <- cbind(datasetXC,target = datasetY$target)
   write.csv(datasetXCY,"dataset/datasetXCY.csv")
   
   remove(datasetC)
   remove(datasetX)
-  remove(datasetXC)
+ # remove(datasetXC)
   remove(datasetX_part1)
   remove(datasetX_part2)
   remove(datasetX_part3)
