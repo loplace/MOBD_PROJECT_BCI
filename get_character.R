@@ -17,12 +17,14 @@ getMatrix <- function(){
   return(my_matrix)
 }
 
-get_character <- function(num_iteration,classifier){
-  num_iteration = 10
-
+get_character <- function(num_iteration,classifier, lecter){
+  
+  start_index <- (lecter-1)*num_iteration*2 + 1
+  last_index <- start_index + 2*num_iteration -1
+  
   #es. (1,3,5,7,9,11,13,15,17,19)
-  row_sub_indexes <- seq(1,num_iteration*2,by = 2)
-  col_sub_indexes <- seq(2,num_iteration*2,by = 2)
+  row_sub_indexes <- seq(start_index,last_index,by = 2)
+  col_sub_indexes <- seq(start_index+1,last_index,by = 2)
   
   row_indexes <- numeric(10)
   col_indexes <- numeric(10)
