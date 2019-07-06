@@ -20,7 +20,7 @@ simone_svm <- function(out){
                    type = 'C-classification', 
                    kernel = 'linear') 
   
-  y_pred = predict(classifier, newdata = test_set)
+  y_pred = predict(classifier, newdata = test_set, decision.values = TRUE, probability = TRUE)
   y_pred
   
   # Making the Confusion Matrix 
