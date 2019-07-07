@@ -1,14 +1,18 @@
 # Given an integer sub_iteration, this function return the most probable index of row/column wished by user
 
 
-get_row_col_indexes <- function(sub_iteration,classifier){
+get_row_col_indexes <- function(sub_iteration,classifier,test){
   
   start_point <- (sub_iteration-1)*6 + 1
   end_point <- start_point + 5
   
   #classifier <- train_svm(train,"polynomial",3)
   # effetuiamo la predizione sul test set
-  y_pred = predict(classifier, newdata = test[start_point:end_point,-1633], 
+  
+  #testReduced <- merge_columns(test)
+  #testFull <- cbind(test,testReduced)
+  
+  y_pred = predict(classifier, newdata = test[start_point:end_point, - which(colnames(test) == "target") ], 
                    decision.values = TRUE)
   
   # prendiamo le colonne associate alle predizioni

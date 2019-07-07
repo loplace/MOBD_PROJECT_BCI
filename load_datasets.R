@@ -3,7 +3,7 @@ library(dplyr)
 
 load_file_with_names <- function (){
   
-  elettrodi <- c("Fz", "Cz", "Pz", "Oz", "P3", "P4", "P7" , "P8")
+  elettrodi <- c("Fz", "Cz", "Pz", "Oz", "P3", "P4", "P7","P8")
   column_names <- c()
   for (name in elettrodi){
     for (i in 1:204){
@@ -26,7 +26,7 @@ load_file_with_names <- function (){
   datasetC <-read.table("dataset/C.txt",col.names = "stimolo")
   datasetY <-read.table("dataset/Y.txt", col.names = "target")
   datasetXC <- cbind(datasetX,cData = datasetC$stimolo)
-  datasetXCY <- cbind(datasetXC,target = datasetY$target)
+  datasetXCY <<- cbind(datasetXC,target = datasetY$target)
   #write.csv(datasetXCY,"dataset/datasetXCY.csv")
   #write.csv(datasetXCY,"dataset/datasetXCY.csv")
 
