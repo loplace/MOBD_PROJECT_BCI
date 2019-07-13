@@ -42,6 +42,8 @@ get_character <- function(num_iteration,classifier, lecter,test){
     row_indexes[i] <- get_row_col_indexes(j,classifier,test)
     i <- i +1
   }
+  #print("row_indexes")
+  #print(row_indexes)
 
   i = 1
   #get most probable column index for each iteration
@@ -49,6 +51,8 @@ get_character <- function(num_iteration,classifier, lecter,test){
     col_indexes[i] <- get_row_col_indexes(j,classifier,test)
     i <- i+1
   }
+  #print("col_indexes")
+  #print(col_indexes)
   
   #compute mode for both arrays
   row_final_index <- as.numeric(getmode(row_indexes))
