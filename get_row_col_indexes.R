@@ -1,23 +1,21 @@
 # Given an integer sub_iteration, this function return the most probable index of row/column wished by user
 
 
-get_row_col_indexes <- function(sub_iteration,classifier,test){
+get_row_col_indexes <- function(sub_iteration,classifier,testToPredict, nrowOfBlock = 6, comparison = NULL){
   
-  start_point <- (sub_iteration-1)*6 + 1
-  end_point <- start_point + 5
+  start_point <- (sub_iteration-1)*nrowOfBlock + 1
+  end_point <- start_point + (nrowOfBlock-1)
   
-  #classifier <- train_svm(train,"polynomial",3)
-  # effetuiamo la predizione sul test set
-  
-  #testReduced <- merge_columns(test)
-  #testFull <- cbind(test,testReduced)
-  
-  y_pred = predict(classifier, newdata = test[start_point:end_point, - which(colnames(test) == "target") ], 
+  y_pred = predict(classifier, newdata = testToPredict[start_point:end_point, - which(colnames(testToPredict) == "target") ], 
                    decision.values = TRUE)
   
   # prendiamo le colonne associate alle predizioni
-  c_of_pred <- datasetXCY[start_point:end_point, 1633] 
-  
+  if(is.null(comparison)){
+    c_of_pred <- datasetXCY[start_point:end_point, 1633] 
+  }
+  else{
+    c_of_pred <- comparison[start_point:end_point]
+  }
   # y_pred è un oggetto di tipo factor in R. Per convertirlo in un array di numeri bisogna usare 
   # la funzione as.numeric ricordando che i risultati che escono corrispondono alla posizione del 
   # vettore [-1 1]
