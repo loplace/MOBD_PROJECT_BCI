@@ -11,7 +11,17 @@ portion_out <- function(sensor){
   out <- cbind(scaled, target = out$target)
   remove(scaled)
   
+  outPositive <- out[out$cData == 1 | out$cData == 7,]
+  outPositive <- outPositive[outPositive$target == 1,]
+  outPositive <- outPositive[1:20,]
+  
+  outPositive <- out[1:12,]
+  
+  matplot(t(outPositive[,1:8]), type = "l", col = ifelse(outPositive[, 10] == 1, 'red','green'))
+  
+  
   matplot(t(out[,1:8]), type = "l", col = ifelse(out[, 10] == 1, 'red','green'))
+  
   
   ds_mean <- rowMeans(out[,1:8], na.rm = FALSE, dims = 1)
   out <- cbind(out, vmean = ds_mean)
