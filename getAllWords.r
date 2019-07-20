@@ -29,11 +29,11 @@ getAllWords <- function(number_of_characters){
   merged_train <- merge_columns(dataset = train)
   train_full <- cbind(train,merged_train)
   
-  reduced_train <- reduce_non_target_lines_in_train(train_full,5)
+  reduced_train <- reduce_non_target_lines_in_train(train,4.5)
   
   # using the previous dataset...
   costs <- table(train$target)  # the weight vector must be named with the classes names
-  costs[1] <- 1       # a class -1 mismatch has a terrible cost
+  costs[1] <- 1    # a class -1 mismatch has a terrible cost
   costs[2] <- 1    # a class +1 mismatch not so much...
 
   class <- train_svm(train, "polynomial", 3, costs)
