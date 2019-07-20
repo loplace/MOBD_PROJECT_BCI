@@ -1,7 +1,7 @@
 # Given an integer sub_iteration, this function return the most probable index of row/column wished by user
 
 
-get_row_col_indexes <- function(sub_iteration,classifier,testToPredict, nrowOfBlock = 6, comparison = NULL){
+get_row_col_indexes_by_argmax <- function(sub_iteration,classifier,testToPredict, nrowOfBlock = 6, comparison = NULL){
   
   start_point <- (sub_iteration-1)*nrowOfBlock + 1
   end_point <- start_point + (nrowOfBlock-1)
@@ -27,28 +27,10 @@ get_row_col_indexes <- function(sub_iteration,classifier,testToPredict, nrowOfBl
   target_prediction <- cbind(c_of_pred, target_prediction, attr(y_pred, "decision.values"))
   colnames(target_prediction) = c("row_col", "prediction", "decision_value")
   
-  #convertiamo la tabella in un data_frame
+  #convertiamo la tabella in un data_frame, ora abbiamo la predizione delle 6 righe/colonne di 1 iterazione
   target_prediction_df<- as.data.frame(target_prediction) 
   
-  #dividiamo in due il dataset in modo da capire quali elementi sono stati classificati + e quali -
-  target_prediction_split <- split(target_prediction_df, target_prediction_df$prediction)
-  tar_pred_plus <- target_prediction_split$'1'
-  #print("Number of target value predicted as 1:")
-  #print(tar_pred_plus)
-  tar_pred_minus <- target_prediction_split$'-1'
-  
-  
-  if (nrow(data.frame(tar_pred_plus = numeric())) != 0) {
-    max_row <- tar_pred_plus[which.max(tar_pred_plus$decision_value), ]
-    my_index <- max_row[1]
-    print("got farest element from hp")
-  } else {
-    min_row <- tar_pred_minus[which.min(tar_pred_minus$decision_value), ]
-    my_index <- min_row[1]
-    #print("got nearest element from hp")
-  }
-  
-  return(my_index)
+  return(target_prediction_df)
   
 }
 
