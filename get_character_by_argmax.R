@@ -69,44 +69,37 @@ get_character_by_argmax <- function(num_iteration,classifier, lecter, testToPred
     decision_values <- row$decision_value
     target <- row$prediction
     final_values <- as.vector(decision_values) * -1
-#    for ( k in 1:length(final_values)){
-#      final_values[k] <- (final_values[k])^2 *sign(final_values[k])
-#  }
+    for ( k in 1:length(final_values)){
+      final_values[k] <- (final_values[k])^2 *sign(final_values[k])
+  }
     row_sum <- sum(final_values)
-    print(i)
-    print(row_sum)
   
     if (row_sum > sum_of_row_decisionvalue){
       sum_of_row_decisionvalue <- row_sum
       row_index <- i}
   }
 
-  print('******************************************************************************')
-  
+
   for (j in 7:12){
     col <- all_columns[all_columns$row_col == j, ]
     decision_values <- col$decision_value
     target <- col$prediction
     final_values <- as.vector(decision_values) * -1
- #   for ( i in 1:length(final_values)){
- #     final_values[i] <- (final_values[i])^2 *sign(final_values[i])
- #   }
+    for ( i in 1:length(final_values)){
+      final_values[i] <- (final_values[i])^2 *sign(final_values[i])
+    }
     col_sum <- sum(final_values)
-    print(j)
-    print(col_sum)
     if (col_sum > sum_of_col_decisionvalue){
       sum_of_col_decisionvalue <- col_sum
       col_index <- j -6}
   }
   
-  print('******************************************************************************')
-  
+
   
   m <- getMatrix()
   character <- m[row_index,col_index]
   print(character)
   
-  print('******************************************************************************')
-  
+
   return (character)
 }
