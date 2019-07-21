@@ -1,0 +1,11 @@
+install.packages("dplyr")
+install.packages("e1071")
+install.packages("pracma")
+install.packages("signal")
+install.packages("data.table")
+
+library(dplyr)
+library(e1071)
+library(pracma)
+library(signal)
+library(data.table)
