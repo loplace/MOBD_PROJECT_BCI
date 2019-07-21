@@ -1,4 +1,13 @@
 
+# funzione che ritorna la matrice corrispondente alla griglia delle lettere
+# presente nella traccia del problema
+# la matrice finale risulta essere
+# | A | B | C | D | E | F |
+# | G | H | I | J | K | L |
+# | M | N | O | P | Q | R |
+# | S | T | U | V | W | X |
+# | Y | Z | 1 | 2 | 3 | 4 |
+# | 5 | 6 | 7 | 8 | 9 | _ |
 getMatrix <- function(){
   c1 <- c("A","G","M","S","Y","5")
   c2 <- c("B","H","N","T","Z","6")
@@ -13,9 +22,13 @@ getMatrix <- function(){
 }
 
 
+# Per poter avorare con più file di piccola dimensione invece che con un singolo grande file, 
+# il dataset è stato diviso in più parti, presenti nella directory 'dataset'.
+# Questa funzione combina tutte le parti del dataset e ritorna un unico dataframe contenente
+# i valori dei sensori, la colonna stimolo e il target
 load_dataset <- function (){
   
-  # RINOMINO LE COLONNE
+  # vengono rinominate le colonne
   elettrodi <- c("Fz", "Cz", "Pz", "Oz", "P3", "P4", "P7","P8")
   column_names <- c()
   for (name in elettrodi){
@@ -25,7 +38,7 @@ load_dataset <- function (){
     }
   }
   
-  # LEGGO LE DIVERSE PARTI DEL DATASET E LE UNISCO
+  # vengono unite le diverse parti del dataset
   datasetX_part1 <-read.table("dataset/xaa.txt",col.names = column_names)
   datasetX_part2 <-read.table("dataset/xab.txt",col.names = column_names)
   datasetX_part3 <-read.table("dataset/xac.txt",col.names = column_names)
@@ -33,10 +46,9 @@ load_dataset <- function (){
   
   datasetX_1 <- rbind(datasetX_part1, datasetX_part2)
   datasetX_2 <- rbind(datasetX_part3, datasetX_part4)
-  
   datasetX <- rbind(datasetX_1, datasetX_2)
   
-  # UNISCO AL DATASET LO STIMOLO E IL TARGET
+  # il dataset viene unito al target e allo stimolo
   datasetC <-read.table("dataset/C.txt",col.names = "stimolo")
   datasetY <-read.table("dataset/Y.txt", col.names = "target")
   datasetCY <- cbind(datasetC,datasetY)
@@ -54,13 +66,17 @@ load_dataset <- function (){
 # Test is GATTO --4
 # Test is MENTE --5
 # Test is VIOLA --6
+# 
+# Questa funzione divide opportunamente train e test set.
+# I dati relativi alla parola inserita dall'utente (sotto forma di indice, 
+# riportato sopra) diventano il nuovo test set. Tutti gli altri sono il train set
 getTestWord <- function(dataset, word){
   
-  # ALLENO IL MODELLO SU TUTTO IL DATASET
+  # se si inserisce 0 si allena il modello su tutto il dataset
   if(word == 0){
     train <- dataset
   }
-  # ESEGUO UNO SPLIT IN TRAIN E TEST
+  # altrimenti viene eseguito uno split
   else {
     start = (word-1)*600 + 1 
     end   = start + 599
