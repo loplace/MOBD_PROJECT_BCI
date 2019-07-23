@@ -43,6 +43,6 @@ model_has_been_trained <- function(){
   returnWord(test)
 }
 
-model_has_to_be_trained()
+#model_has_to_be_trained()
 test_has_to_be_assembled()
 model_has_been_trained()
