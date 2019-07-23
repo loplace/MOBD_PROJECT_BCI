@@ -75,8 +75,8 @@ load_test_dataset <- function (){
   datasetC <-read.table("test/C.txt",col.names = "stimolo")
   datasetY <-read.table("test/Y.txt", col.names = "target")
   datasetCY <- cbind(datasetC,datasetY)
-  datasetXC <- cbind(datasetX,cData = datasetC$stimolo)
-  datasetXCY <- cbind(datasetXC,target = datasetY$target)
+  datasetXC <- cbind(datasetX,datasetC)
+  datasetXCY <- cbind(datasetXC,datasetY)
   
   test <<- datasetXCY
 }

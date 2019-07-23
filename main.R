@@ -15,10 +15,13 @@ model_has_to_be_trained <- function(testWord = 0){
   if(testWord != 0){
     ds_split <- getTestWord(dataset, testWord)
     train <- ds_split$train
+    train <- train[,- which(colnames(train) == "cData")]
     test <<- ds_split$test
   }
   else{
     train <- dataset
+    train <- train[,- which(colnames(dataset) == "cData")]
+    
   }
   
   trainMA <- applyMovingAverage(train, 1)
@@ -40,6 +43,6 @@ model_has_been_trained <- function(){
   returnWord(test)
 }
 
-#model_has_to_be_trained()
-#test_has_to_be_assembled()
+model_has_to_be_trained()
+test_has_to_be_assembled()
 model_has_been_trained()
