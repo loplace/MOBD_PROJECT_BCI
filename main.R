@@ -26,6 +26,8 @@ model_has_to_be_trained <- function(testWord = 0){
   saveModel(classGauss)
 }
 
+# Funzione che crea l'oggetto test nel global environment. 
+# è necessario che siano presenti i file X.txt, Y.txt e C.txt nella directory "test"
 test_has_to_be_assembled <- function(){
   load_test_dataset()
 }
@@ -39,4 +41,5 @@ model_has_been_trained <- function(){
 }
 
 #model_has_to_be_trained()
+#test_has_to_be_assembled()
 model_has_been_trained()
