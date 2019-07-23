@@ -33,3 +33,6 @@ model_has_to_be_trained <- function(testWord = 0){
 model_has_been_trained <- function(){
   returnWord(test)
 }
+
+#model_has_to_be_trained()
+model_has_been_trained()
