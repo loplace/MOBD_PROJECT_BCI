@@ -59,6 +59,28 @@ load_dataset <- function (){
   
 }
 
+#come load_dataset, ma per il test-set
+load_test_dataset <- function (){
+  
+  elettrodi <- c("Fz", "Cz", "Pz", "Oz", "P3", "P4", "P7","P8")
+  column_names <- c()
+  for (name in elettrodi){
+    for (i in 1:204){
+      column_name <- paste(name,i,sep = "_")
+      column_names <- c(column_names,column_name)
+    }
+  }
+  
+  datasetX <-read.table("test/X.txt",col.names = column_names)
+  datasetC <-read.table("test/C.txt",col.names = "stimolo")
+  datasetY <-read.table("test/Y.txt", col.names = "target")
+  datasetCY <- cbind(datasetC,datasetY)
+  datasetXC <- cbind(datasetX,cData = datasetC$stimolo)
+  datasetXCY <- cbind(datasetXC,target = datasetY$target)
+  
+  test <<- datasetXCY
+}
+
 
 # Test is 2BACI --1
 # Test is 5ROSE --2

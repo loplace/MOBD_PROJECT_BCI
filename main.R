@@ -26,6 +26,10 @@ model_has_to_be_trained <- function(testWord = 0){
   saveModel(classGauss)
 }
 
+test_has_to_be_assembled <- function(){
+  load_test_dataset()
+}
+
 # Nel caso in cui il modello sia presente nella directory 'model' è possibile 
 # runnare direttamente questa funzione. 
 # IL DATASET DI TEST DEVE ESSERE PRESENTE NELL'ENVIRONMENT CON NOME 'test'
